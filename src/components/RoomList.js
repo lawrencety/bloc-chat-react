@@ -7,7 +7,9 @@ class RoomList extends Component {
     this.roomsRef = this.props.firebase.database().ref('rooms');
 
     this.state = {
-      rooms: []
+      rooms: [],
+      newRoom: '',
+      showModal: "add-room-modal display-none"
     };
   }
 
@@ -19,18 +21,61 @@ class RoomList extends Component {
     });
   };
 
+  createRoom(newRoom) {
+    this.roomsRef.push({
+      name: newRoom
+    });
+  };
+
+  handleChange(e) {
+    this.setState({ newRoom: e.target.value });
+  }
+
+  handleSubmit(e) {
+    if (!this.state.newRoom) {return}
+      this.createRoom(this.state.newRoom);
+  }
+
+  showModal() {
+    this.setState({ showModal: "add-room-modal display-block" });
+  };
+
+  hideModal() {
+    this.setState({ showModal: "add-room-modal display-none" });
+  }
+
   render() {
     return (
-      <div className ="room-list">
-        <ul>
-          {
-            this.state.rooms.map( (key, name) =>
-              <li className="room-item" key="key">
-                {key.name}
-              </li>
-            )
-          }
-        </ul>
+      <div className="rooms">
+        <section className ="side-bar">
+          <div className="side-bar-head">
+            <h1> Bloc Chat </h1>
+            <button className="add-room" onClick={() => this.showModal()}>New Room</button>
+          </div>
+          <div className ="room-list">
+            <ul>
+              {
+                this.state.rooms.map( (key, name) =>
+                  <li className="room-item" key="key">
+                    {key.name}
+                  </li>
+                )
+              }
+            </ul>
+          </div>
+        </section>
+        <section className={this.state.showModal}>
+          <h2>Create New Room</h2>
+          <form onSubmit={(e) => this.handleSubmit(e)}>
+            <input className="form-text"
+              type="text"
+              value= {this.state.newRoom}
+              onChange= {(e) => this.handleChange(e)}
+            />
+            <button className="form-button" onClick={() => this.hideModal()}>Cancel</button>
+            <input className="form-button" type="submit" value="Create" />
+          </form>
+        </section>
       </div>
     )
   }

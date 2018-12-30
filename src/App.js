@@ -18,12 +18,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <section className ="side-bar">
-          <h1> Bloc Chat </h1>
-          <RoomList
-            firebase = {firebase}
-          />
-        </section>
+        <RoomList
+          firebase = {firebase}
+        />
       </div>
     );
   }
