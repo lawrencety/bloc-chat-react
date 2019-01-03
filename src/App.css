@@ -3,16 +3,19 @@
 }
 
 .side-bar {
+  display: inline-block;
   position: fixed;
   height: 100vh;
-  width: 20vw;
+  min-width: 25%;
+  max-width: 25%;
   background-color: #DFDFDF;
-  padding: 0px 40px;
+  padding: 0px 0px;
 }
 
 .side-bar-head {
   vertical-align: middle;
   height: 100px;
+  padding-left: 40px;
 }
 
 h1 {
@@ -20,9 +23,13 @@ h1 {
   display: inline-block;
 }
 
+.room-list {
+  padding-left: 40px;
+}
+
 button.add-room {
   display: inline-block;
-  margin: 20px;
+  margin: 20px 0px 0px 20px;
   position: absolute;
   top: 25px;
   font-size: 1rem;
@@ -45,10 +52,17 @@ ul {
   padding: 0px;
 }
 
-li.room-item {
+.room-item {
+  display: block;
   margin: 10px 0px;
   padding: 10px 0px;
   font-size: 1.2rem;
+  cursor: pointer;
+  transition: 250ms;
+}
+
+.room-item:hover {
+  color: #888888;
 }
 
 .add-room-modal {
@@ -91,4 +105,57 @@ li.room-item {
 
 .display-block {
   display: block;
+}
+
+.room-title {
+  display: block;
+  width: 75%;
+  max-width: 75%;
+  padding: 0px 30px;
+  max-height: 70px;
+  margin: auto;
+  position: fixed;
+  background-color: #FFFFFF;
+  z-index: 99;
+}
+
+.messages {
+  display: inline-block;
+  position: absolute;
+  min-width: 75%;
+  max-width: 75%;
+  height: 100vh;
+  left: 25%;
+}
+
+.message {
+  display: block;
+  min-height: 50px;
+  padding: 10px 30px;
+  position: relative;
+  top: 70px;
+}
+
+.message-text {
+  margin: 0px;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 1rem;
+  display: block;
+}
+
+.content {
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.sent-at {
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #777777;
 }
