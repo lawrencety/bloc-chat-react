@@ -159,3 +159,32 @@ ul {
   font-style: italic;
   color: #777777;
 }
+
+.user {
+  position: fixed;
+  bottom: 10%;
+  z-index: 99;
+  width: 25%;
+  padding-left: 40px;
+}
+
+.username {
+  font-weight: 400;
+  color: #444444;
+  margin: 5px 0px;
+}
+
+button.login {
+  font-size: 1rem;
+  color: #777777;
+  background-color: #FFF;
+  border-style: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: 250ms;
+}
+
+button.login:hover {
+  background-color: #EEEEEE;
+  color: #333333;
+}
