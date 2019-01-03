@@ -12,21 +12,18 @@ class MessageList extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.active !== prevProps.active) {
-      this.setState({
-        messages: []
-      });
-      this.messagesRef.on('child_added', snapshot => {
-        const messages = snapshot.val();
-        messages.key = snapshot.key;
-        console.log(messages);
-        if (this.props.active === messages.roomID) {
-          this.setState({ messages: this.state.messages.concat(messages) });
-        }
-      });
-    };
+  componentDidMount() {
+    this.setState({
+      messages: []
+    });
+    this.messagesRef.on('child_added', snapshot => {
+      const messages = snapshot.val();
+      messages.key = snapshot.key;
+      console.log(messages);
+      this.setState({ messages: this.state.messages.concat(messages) });
+    });
   }
+
 
   render() {
     return (
@@ -36,13 +33,15 @@ class MessageList extends Component {
         </div>
         <section className="message-list">
           {
-            this.state.messages.map( (message) =>
-              <div className="message" key={message.key}>
-                <p className="message-text username">{message.username}</p>
-                <p className="message-text content">{message.content}</p>
-                <p className="message-text sent-at">{message.sentAt}</p>
-              </div>
-            )
+            this.state.messages
+              .filter( message => message.roomID === this.props.active )
+              .map( (message) =>
+                <div className="message" key={message.key}>
+                  <p className="message-text username">{message.username}</p>
+                  <p className="message-text content">{message.content}</p>
+                  <p className="message-text sent-at">{message.sentAt}</p>
+                </div>
+              )
           }
         </section>
       </div>
