@@ -19,7 +19,6 @@ class MessageList extends Component {
     this.messagesRef.on('child_added', snapshot => {
       const messages = snapshot.val();
       messages.key = snapshot.key;
-      console.log(messages);
       this.setState({ messages: this.state.messages.concat(messages) });
     });
   }
