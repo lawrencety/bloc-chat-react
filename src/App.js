@@ -27,12 +27,14 @@ class App extends Component {
       rooms: [],
       roomName: '',
       user: 'Guest',
+      showForm: "display-none message-form"
     };
   }
 
   setActive(e) {
-    this.setState({ active: e.key});
+    this.setState({ active: e.key, showForm: "display-block message-form"});
     this.roomTitle(e.key);
+
   }
 
   roomTitle(key) {
@@ -74,6 +76,8 @@ class App extends Component {
           firebase = {firebase}
           active = {this.state.active}
           roomName = {this.state.roomName}
+          user = {this.state.user}
+          showForm = {this.state.showForm}
         />
       </div>
     );

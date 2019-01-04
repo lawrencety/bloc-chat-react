@@ -12,6 +12,27 @@ class MessageList extends Component {
     };
   }
 
+  handleChange(e) {
+    this.setState({ newMessageContent: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (!this.state.newMessageContent) {return}
+    const newMessage = {
+      username: this.props.user,
+      content: this.state.newMessageContent,
+      sentAt: this.setTime(),
+      roomID: this.props.active
+    };
+    this.messagesRef.push(newMessage);
+    this.setState({newMessageContent: ''})
+  }
+
+  setTime() {
+    return this.props.firebase.database.ServerValue.TIMESTAMP
+  }
+
   componentDidMount() {
     this.setState({
       messages: []
@@ -43,6 +64,15 @@ class MessageList extends Component {
               )
           }
         </section>
+        <form className={this.props.showForm} onSubmit={(e) => this.handleSubmit(e)}>
+          <input
+            className="message-input"
+            type="text"
+            value= {this.state.newMessageContent}
+            onChange={(e) => this.handleChange(e)}
+          />
+          <input className="message-submit" type="submit" value="Send"/>
+        </form>
       </div>
     );
   }
